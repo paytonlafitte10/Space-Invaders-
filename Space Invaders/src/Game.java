@@ -1,7 +1,8 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage; 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.*; 
 
 
@@ -10,6 +11,11 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	
 	private BufferedImage back; 
 	private int key; 
+	private char screen;
+	private ImageIcon background;
+	private ImageIcon lose;
+	private ImageIcon win;
+	private Font hkModularFont;
 
 
 
@@ -18,6 +24,12 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 		new Thread(this).start();	
 		this.addKeyListener(this);
 		key =-1; 
+		screen = 'S';//start sreen
+		background = new ImageIcon("spacebackground.png");
+		lose = new ImageIcon("losescreen.png");
+		win = new ImageIcon("winscreen.png");
+		Font hkModularFontRaw = null;
+		hkModularFont = hkModularFontRaw.deriveFont(Font.PLAIN, 24);
 		
 	
 	}
@@ -40,8 +52,31 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	  	}
 	
 
+
+
+	public void screen(Graphics g2d) {
+		switch(screen) {
+			case 'S':
+				g2d.drawImage(background.getImage(), 0, 0, null);
+				g2d.setFont(hkModularFont);
+				break;
+
+			case 'G':
+
+				break;
+
+			case 'L':
+				g2d.drawImage(lose.getImage(), 0, 0, null);
+				break;
+
+			case 'W':
+				g2d.drawImage(win.getImage(), 0, 0, null);
+				break;
+		}
+	}
 	
 	
+
 	
 	public void paint(Graphics g){
 		
